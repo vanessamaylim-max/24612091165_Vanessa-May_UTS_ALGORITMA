@@ -1,0 +1,123 @@
+// ===============================
+// UTS ALGORTIMA & PEMROGRAMAN (DART)
+// Vanessa May - NPM: 24612091165
+// ===============================
+
+// -------------------------------
+// Class Penilaian (OOP)
+// -------------------------------
+class Penilaian {
+  int ip;
+  String nilai = "";
+  String keterangan = "";
+
+  Penilaian(this.ip);
+
+  // Fungsi menentukan nilai huruf dan keterangan
+  void hitungNilai() {
+    if (ip >= 90) {
+      nilai = "A";
+      keterangan = "Lulus nilai terbaik";
+    } else if (ip >= 80) {
+      nilai = "B";
+      keterangan = "Lulus";
+    } else if (ip >= 60) {
+      nilai = "C";
+      keterangan = "Lulus ala kadarnya";
+    } else if (ip >= 40) {
+      nilai = "D";
+      keterangan = "Perlu diperbaiki";
+    } else {
+      nilai = "E";
+      keterangan = "Tidak Lulus";
+    }
+  }
+
+  // Perulangan sampai lulus
+  void perbaikiNilai() {
+    while (nilai == "D" || nilai == "E") {
+      print("Nilai $nilai ($ip) belum lulus → ditambah 2");
+      ip += 2;
+      hitungNilai();
+    }
+  }
+}
+
+// -------------------------------
+// Algoritma Bubble Sort
+// -------------------------------
+List<int> bubbleSort(List<int> data) {
+  for (int i = 0; i < data.length - 1; i++) {
+    for (int j = 0; j < data.length - i - 1; j++) {
+      if (data[j] > data[j + 1]) {
+        int temp = data[j];
+        data[j] = data[j + 1];
+        data[j + 1] = temp;
+      }
+    }
+  }
+  return data;
+}
+
+// -------------------------------
+// Algoritma Searching (Linear Search)
+// -------------------------------
+int linearSearch(List<int> data, int target) {
+  for (int i = 0; i < data.length; i++) {
+    if (data[i] == target) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+// -------------------------------
+// MAIN PROGRAM
+// -------------------------------
+void main() {
+  // NPM Vanessa
+  int npm = 24612091165;
+  int ip = npm % 100; // 2 digit terakhir
+
+  print("NPM: $npm");
+  print("IP awal (2 digit terakhir): $ip\n");
+
+  // Buat objek OOP
+  Penilaian mahasiswa = Penilaian(ip);
+  mahasiswa.hitungNilai();
+
+  print(
+    "Nilai awal: ${mahasiswa.nilai}, Keterangan: ${mahasiswa.keterangan}\n",
+  );
+
+  // Jika D atau E, lakukan perulangan
+  if (mahasiswa.nilai == "D" || mahasiswa.nilai == "E") {
+    mahasiswa.perbaikiNilai();
+    print("\nSetelah perbaikan:");
+  }
+
+  // Hasil akhir
+  print("IP Akhir: ${mahasiswa.ip}");
+  print("Nilai Akhir: ${mahasiswa.nilai}");
+  print("Keterangan Akhir: ${mahasiswa.keterangan}\n");
+
+  // -------------------------------
+  // DATA UNTUK SORTING & SEARCHING
+  // -------------------------------
+  List<int> nilaiList = [65, 54, 30, 88, 45, 60, 20, 95];
+  print("Data sebelum sorting: $nilaiList");
+
+  // Sorting
+  List<int> sorted = bubbleSort(List.from(nilaiList));
+  print("Data setelah sorting (Bubble Sort): $sorted");
+
+  // Searching nilai yang belum lulus (nilai < 60)
+  int target = 45;
+  int cariIndex = linearSearch(sorted, target);
+
+  if (cariIndex != -1) {
+    print("Nilai $target ditemukan pada index: $cariIndex");
+  } else {
+    print("Nilai $target tidak ditemukan");
+  }
+}
